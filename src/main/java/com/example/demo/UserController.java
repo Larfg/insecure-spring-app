@@ -36,8 +36,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username, password);
+    public ResponseEntity<String> login(@RequestBody User user) {
+        Optional<User> userOptional = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (userOptional.isPresent()) {
             return ResponseEntity.ok("Inicio de sesión exitoso");
         } else {
